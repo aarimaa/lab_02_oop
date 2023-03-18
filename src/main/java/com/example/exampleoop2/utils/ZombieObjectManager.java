@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.exampleoop2.utils.SoundPlayer.ZOMBIE_DIE_SOUND_PATH;
+
 public class ZombieObjectManager {
     private static final List<Zombie> zombies = new ArrayList<>();
     public static void addZombie(Zombie zombie) {
@@ -21,6 +23,8 @@ public class ZombieObjectManager {
             GameApplication.root.getChildren().remove(zombieToRemove.getLineOfMaxHealth());
             GameApplication.root.getChildren().remove(zombieToRemove.getLabelName());
             zombies.remove(zombieToRemove);
+
+            SoundPlayer.playSound(ZOMBIE_DIE_SOUND_PATH, false);
 
             AlertUtils.showAlert("Ви успішно видалили мікрооб'єкт!", Alert.AlertType.INFORMATION);
         }
