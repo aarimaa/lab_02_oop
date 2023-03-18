@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class CreateZombieDialog {
+public class ZombieCreateDialog {
     private static final int DIALOG_WIDTH = 350;
     private static final int DIALOG_HEIGHT = 430;
 
@@ -39,8 +39,19 @@ public class CreateZombieDialog {
             String speed = speedText.getText().trim();
 
             try {
-                ZombieObjectManager.addZombie(new Zombie(name, Integer.parseInt(health),
-                        Integer.parseInt(damage), Double.parseDouble(speed), x, y));
+                int healthValue = Integer.parseInt(health);
+                int damageValue = Integer.parseInt(damage);
+                double speedValue = Double.parseDouble(speed);
+
+                if (healthValue > 100 || damageValue > 30 || speedValue > 10) {
+                    AlertUtils.showAlert(
+                            "Значення здоров'я, урону та швидкості не можуть бути більшими за 100, 30 та 10 відповідно!",
+                            Alert.AlertType.ERROR
+                    );
+                    return;
+                }
+
+                ZombieObjectManager.addZombie(new Zombie(name, healthValue, damageValue, speedValue, x, y));
                 AlertUtils.showAlert("Ви успішно створили новий мікрооб'єкт", Alert.AlertType.INFORMATION);
             } catch (Exception e) {
                 e.printStackTrace();

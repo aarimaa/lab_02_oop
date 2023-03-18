@@ -76,6 +76,7 @@ public class Zombie {
     }
 
     public Zombie() {
+        System.out.println("Створення нового зомбі з використанням конструктора без параметрів!");
         ZombieObjectManager.getZombies().add(this);
     }
 

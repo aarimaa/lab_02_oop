@@ -3,7 +3,7 @@ package com.example.exampleoop2;
 import com.example.exampleoop2.utils.SoundPlayer;
 import com.example.exampleoop2.zombieDialogs.ObjectOperation;
 import com.example.exampleoop2.zombieDialogs.ZombieSelectionDialog;
-import com.example.exampleoop2.zombieDialogs.CreateZombieDialog;
+import com.example.exampleoop2.zombieDialogs.ZombieCreateDialog;
 
 import com.example.exampleoop2.utils.SpawnWallPaper;
 import javafx.application.Application;
@@ -33,7 +33,7 @@ public class GameApplication extends Application {
 
         scene.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-                CreateZombieDialog.display(mouseEvent.getX(), mouseEvent.getY());
+                ZombieCreateDialog.display(mouseEvent.getX(), mouseEvent.getY());
             }
         });
 
