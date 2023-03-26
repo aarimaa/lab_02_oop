@@ -114,8 +114,8 @@ public class Human {
 
         GameApplication.getRoot().getChildren().remove(lineOfHealth);
 
-        lineOfHealth = new Line(x, y, x + health, y);
-        lineOfHealth.setStrokeWidth(5);
+        lineOfHealth = new Line(x + 20, y, x + health + 20, y);
+        lineOfHealth.setStrokeWidth(8);
         lineOfHealth.setStroke(Color.RED);
 
         GameApplication.getRoot().getChildren().add(lineOfHealth);
@@ -146,13 +146,13 @@ public class Human {
             this.y = 0.0;
         }
 
-        labelName.setLayoutX(x);
-        labelName.setLayoutY(y);
+        labelName.setLayoutX(x + 20);
+        labelName.setLayoutY(y - 30);
 
         GameApplication.getRoot().getChildren().remove(lineOfHealth);
 
-        lineOfHealth = new Line(x, y, x + health, y);
-        lineOfHealth.setStrokeWidth(5);
+        lineOfHealth = new Line(x + 20, y, x + health + 20, y);
+        lineOfHealth.setStrokeWidth(8);
         lineOfHealth.setStroke(Color.RED);
 
         GameApplication.getRoot().getChildren().add(lineOfHealth);
