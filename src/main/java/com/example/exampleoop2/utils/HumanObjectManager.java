@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class HumanObjectManager {
-    private static final List<Human> zombies = new ArrayList<>();
-    public static void addHuman(Human zombie) {
-        zombies.add(zombie);
+    private static final List<Human> humans = new ArrayList<>();
+    public static void addHuman(Human human) {
+        humans.add(human);
     }
-    public static void removeZombie(int index) {
+    public static void removeHuman(int index) {
         try {
-            Human zombieToRemove = getHumans().get(index);
-            GameApplication.root.getChildren().remove(zombieToRemove.getImage());
-            GameApplication.root.getChildren().remove(zombieToRemove.getLineOfHealth());
-            GameApplication.root.getChildren().remove(zombieToRemove.getLineOfMaxHealth());
-            GameApplication.root.getChildren().remove(zombieToRemove.getLabelName());
-            zombies.remove(zombieToRemove);
+            Human humanToRemove = getHumans().get(index);
+            GameApplication.getRoot().getChildren().remove(humanToRemove.getImage());
+            GameApplication.getRoot().getChildren().remove(humanToRemove.getLineOfHealth());
+            GameApplication.getRoot().getChildren().remove(humanToRemove.getLineOfMaxHealth());
+            GameApplication.getRoot().getChildren().remove(humanToRemove.getLabelName());
+            humans.remove(humanToRemove);
 
             AlertUtils.showAlert("Ви успішно видалили мікрооб'єкт!", Alert.AlertType.INFORMATION);
         }
@@ -30,7 +30,7 @@ public class HumanObjectManager {
         }
     }
     public static List<Human> getHumans() {
-        return zombies;
+        return humans;
     }
     public static List<String> getNamesOfHuman() {
         return getHumans().stream()

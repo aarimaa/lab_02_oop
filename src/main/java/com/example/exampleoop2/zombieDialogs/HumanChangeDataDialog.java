@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HumanChangeDataDialog {
-    public static void display(int zombieIndex) {
+    public static void display(int humanIndex) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Введіть нові параметри!");
         window.setMinWidth(250);
 
-        List<String> paramsToChange = getZombieParameters(zombieIndex);
+        List<String> paramsToChange = getHumanParameters(humanIndex);
 
         TextField nameText = new TextField(paramsToChange.get(0));
         TextField healthText = new TextField(paramsToChange.get(1));
@@ -56,7 +56,7 @@ public class HumanChangeDataDialog {
                             Alert.AlertType.ERROR);
                     return;
                 }
-                updateZombieData(zombieIndex, name, healthValue, damageValue, speedValue, xValue, yValue);
+                updateHumanData(humanIndex, name, healthValue, damageValue, speedValue, xValue, yValue);
                 AlertUtils.showAlert("Ви успішно змінили дані мікрооб'єкту", Alert.AlertType.INFORMATION);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -92,27 +92,27 @@ public class HumanChangeDataDialog {
 
         return layout;
     }
-    private static List<String> getZombieParameters(int index) {
-        Human zombie = HumanObjectManager.getHumans().get(index);
+    private static List<String> getHumanParameters(int index) {
+        Human human = HumanObjectManager.getHumans().get(index);
         List<String> paramsToChange = new ArrayList<>();
 
-        paramsToChange.add(zombie.getName());
-        paramsToChange.add(String.valueOf(zombie.getHealth()));
-        paramsToChange.add(String.valueOf(zombie.getDamage()));
-        paramsToChange.add(String.valueOf(zombie.getSpeed()));
-        paramsToChange.add(String.valueOf(zombie.getX()));
-        paramsToChange.add(String.valueOf(zombie.getY()));
+        paramsToChange.add(human.getName());
+        paramsToChange.add(String.valueOf(human.getHealth()));
+        paramsToChange.add(String.valueOf(human.getDamage()));
+        paramsToChange.add(String.valueOf(human.getSpeed()));
+        paramsToChange.add(String.valueOf(human.getX()));
+        paramsToChange.add(String.valueOf(human.getY()));
 
         return paramsToChange;
     }
-    private static void updateZombieData(int index, String name, int health, int damage,
+    private static void updateHumanData(int index, String name, int health, int damage,
                                         double speed, double x, double y) {
-        Human zombie = HumanObjectManager.getHumans().get(index);
+        Human human = HumanObjectManager.getHumans().get(index);
 
-        zombie.setName(name);
-        zombie.setHealth(health);
-        zombie.setDamage(damage);
-        zombie.setSpeed(speed);
-        zombie.setPosition(x, y);
+        human.setName(name);
+        human.setHealth(health);
+        human.setDamage(damage);
+        human.setSpeed(speed);
+        human.setPosition(x, y);
     }
 }

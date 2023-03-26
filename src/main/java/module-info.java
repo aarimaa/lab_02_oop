@@ -11,4 +11,6 @@ module com.example.exampleoop {
     opens com.example.exampleoop2.utils to javafx.fxml;
     exports com.example.exampleoop2.zombieDialogs;
     opens com.example.exampleoop2.zombieDialogs to javafx.fxml;
+    exports com.example.exampleoop2.gameEntities;
+    opens com.example.exampleoop2.gameEntities to javafx.fxml;
 }

@@ -43,7 +43,7 @@ public class HumanSelectionDialog {
                         HumanChangeDataDialog.display(choice);
                         break;
                     case DELETE_OBJECT:
-                        HumanObjectManager.removeZombie(choice);
+                        HumanObjectManager.removeHuman(choice);
                         break;
                 }
             }

@@ -1,7 +1,6 @@
 package com.example.exampleoop2.gameEntities;
 
 import com.example.exampleoop2.GameApplication;
-
 import com.example.exampleoop2.utils.HumanObjectManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -53,26 +52,26 @@ public class Human {
         labelName.setTextFill(Color.RED);
         Label label = new Label(" ");
 
-        lineOfMaxHealth = new Line(x, y, x + 100, y);
-        lineOfMaxHealth.setStrokeWidth(5);
+        lineOfMaxHealth = new Line(x + 20, y, x + 120, y);
+        lineOfMaxHealth.setStrokeWidth(8);
         lineOfMaxHealth.setStroke(Color.LIGHTGRAY);
 
-        lineOfHealth = new Line(x, y, x + health, y);
-        lineOfHealth.setStrokeWidth(5);
+        lineOfHealth = new Line(x + 20, y, x + health + 20, y);
+        lineOfHealth.setStrokeWidth(8);
         lineOfHealth.setStroke(Color.RED);
 
         image = new ImageView(new Image(Objects.requireNonNull(
-                GameApplication.class.getResource("images/human.png")).toString(),90,150,false,false));
+                GameApplication.class.getResource("images/human.png")).toString(),150,200,false,false));
         image.setX(x);
         image.setY(y);
 
         System.out.println("Створено нову людину з ім'ям " + this.name);
-        GameApplication.root.getChildren().addAll(image, labelName, lineOfMaxHealth, lineOfHealth, label);
+        GameApplication.getRoot().getChildren().addAll(image, labelName, lineOfMaxHealth, lineOfHealth, label);
     }
 
     public Human() {
+        this("Human", 85, 15, 5.0, 100, 150);
         System.out.println("Створення нового зомбі з використанням конструктора без параметрів!");
-        HumanObjectManager.getHumans().add(new Human("Human", 85, 15, 5.0, 100, 150));
     }
 
     public void move(double distance) {
@@ -113,13 +112,13 @@ public class Human {
             this.health = 0;
         }
 
-        GameApplication.root.getChildren().remove(lineOfHealth);
+        GameApplication.getRoot().getChildren().remove(lineOfHealth);
 
         lineOfHealth = new Line(x, y, x + health, y);
         lineOfHealth.setStrokeWidth(5);
         lineOfHealth.setStroke(Color.RED);
 
-        GameApplication.root.getChildren().add(lineOfHealth);
+        GameApplication.getRoot().getChildren().add(lineOfHealth);
     }
 
     public int getDamage() {
@@ -150,13 +149,13 @@ public class Human {
         labelName.setLayoutX(x);
         labelName.setLayoutY(y);
 
-        GameApplication.root.getChildren().remove(lineOfHealth);
+        GameApplication.getRoot().getChildren().remove(lineOfHealth);
 
         lineOfHealth = new Line(x, y, x + health, y);
         lineOfHealth.setStrokeWidth(5);
         lineOfHealth.setStroke(Color.RED);
 
-        GameApplication.root.getChildren().add(lineOfHealth);
+        GameApplication.getRoot().getChildren().add(lineOfHealth);
 
         image.setX(x);
         image.setY(y);

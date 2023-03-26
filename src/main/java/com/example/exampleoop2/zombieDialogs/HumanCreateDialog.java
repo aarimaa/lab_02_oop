@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 public class HumanCreateDialog {
     private static final int DIALOG_WIDTH = 350;
     private static final int DIALOG_HEIGHT = 430;
+    private static final int MAX_HEALTH = 100;
+    private static final int MAX_DAMAGE = 30;
+    private static final double MAX_SPEED = 10.0;
 
     public static void display(double x, double y) {
         Stage window = new Stage();
@@ -27,10 +30,10 @@ public class HumanCreateDialog {
         TextField healthText = new TextField();
         TextField damageText = new TextField();
         TextField speedText = new TextField();
-        nameText.setPromptText("ім'я");
-        healthText.setPromptText("від 0 до 100");
-        damageText.setPromptText("від 0 до 30");
-        speedText.setPromptText("від 0 до 10");
+        nameText.setPromptText("Ім'я");
+        healthText.setPromptText("від 1 до 100");
+        damageText.setPromptText("від 1 до 30");
+        speedText.setPromptText("від 1 до 10");
 
         VBox layout = createLayout(nameText, healthText, damageText, speedText, x, y);
 
@@ -41,28 +44,29 @@ public class HumanCreateDialog {
             String damage = damageText.getText().trim();
             String speed = speedText.getText().trim();
 
-            if (name.isEmpty() && health.isEmpty() && damage.isEmpty() && speed.isEmpty()) {
-                HumanObjectManager.addHuman(new Human());
-                AlertUtils.showAlert("Ви успішно створили новий мікрооб'єкт", Alert.AlertType.INFORMATION);
-                window.close();
-                return;
-            }
-
             try {
+                if (name.isEmpty() && health.isEmpty() && damage.isEmpty() && speed.isEmpty()) {
+                    HumanObjectManager.addHuman(new Human());
+                    AlertUtils.showAlert("Ви успішно створили новий мікрооб'єкт", Alert.AlertType.INFORMATION);
+                    window.close();
+                    return;
+                }
+
                 int healthValue = Integer.parseInt(health);
                 int damageValue = Integer.parseInt(damage);
                 double speedValue = Double.parseDouble(speed);
 
-                if (healthValue > 100 || damageValue > 30 || speedValue > 10) {
+                if (!isValidData(healthValue, damageValue, speedValue)) {
                     AlertUtils.showAlert(
-                            "Значення здоров'я, урону та швидкості не можуть бути більшими за 100, 30 та 10 відповідно!",
+                            "Значення здоров'я, урону та швидкості повинні бути в межах 1-100, 1-30 та 1-10 відповідно!",
                             Alert.AlertType.ERROR
                     );
-                } else {
-                    HumanObjectManager.addHuman(new Human(name, healthValue, damageValue, speedValue, x, y));
-                    AlertUtils.showAlert("Ви успішно створили новий мікрооб'єкт", Alert.AlertType.INFORMATION);
-                    window.close();
+                    return;
                 }
+                HumanObjectManager.addHuman(new Human(name, healthValue, damageValue, speedValue, x, y));
+                AlertUtils.showAlert("Ви успішно створили новий мікрооб'єкт", Alert.AlertType.INFORMATION);
+                window.close();
+
             } catch (NumberFormatException e) {
                 AlertUtils.showAlert("Помилка, введені некоректні дані!", Alert.AlertType.ERROR);
             }
@@ -73,6 +77,11 @@ public class HumanCreateDialog {
         Scene scene = new Scene(layout, DIALOG_WIDTH, DIALOG_HEIGHT);
         window.setScene(scene);
         window.showAndWait();
+    }
+    private static boolean isValidData(int health, int damage, double speed) {
+        return (health >= 1 && health <= MAX_HEALTH)
+                && (damage >= 1 && damage <= MAX_DAMAGE)
+                && (speed >= 1.0 && speed <= MAX_SPEED);
     }
 
     private static VBox createLayout(TextField nameText, TextField healthText,
@@ -103,7 +112,8 @@ public class HumanCreateDialog {
                 damageLabel, damageText,
                 speedLabel, speedText,
                 xLabel, xText,
-                yLabel, yText);
+                yLabel, yText
+        );
 
         return layout;
     }

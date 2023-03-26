@@ -18,7 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class GameApplication extends Application {
-    public static Group root = new Group();
+    private static Group root = new Group();
     @Override
     public void start(Stage stage) throws FileNotFoundException {
         Image mapImage = new Image(new FileInputStream("src/main/resources/com/example/exampleoop2/images/gameMap.png"));
@@ -51,6 +51,11 @@ public class GameApplication extends Application {
             }
         });
     }
+
+    public static Group getRoot() {
+        return root;
+    }
+
     public static void main(String[] args) {
         launch();
     }
